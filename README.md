@@ -1,1 +1,3 @@
-# ClassVec3
+# Class Vec3
+
+Homework - Game Development. 

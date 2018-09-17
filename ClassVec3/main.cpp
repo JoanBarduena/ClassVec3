@@ -1,109 +1,46 @@
 #include <iostream>
 using namespace std; 
-
-class vec3
-{
-public:
-
-	float x, y, z; 
-
-public:
-
-	vec3() 
-	{
-		x = 0; 
-		y = 0; 
-		z = 0; 
-	};
-
-	vec3(float x_, float y_, float z_) : x(x_), y(y_), z(z_) {}
-
-	vec3 operator+(vec3 &vec) const {
-		vec3 newVec; 
-		newVec.x = x + vec.x;
-		newVec.y = y + vec.y; 
-		newVec.z = z + vec.z; 
-		return newVec; 
-	}
-
-	vec3 operator-(vec3 &vec) const {
-		vec3 newVec; 
-		newVec.x = x - vec.x;
-		newVec.y = y - vec.y;
-		newVec.z = z - vec.z;
-		return newVec;
-	}
-
-	vec3 operator+=(vec3 &vec) {
-		x += vec.x; 
-		y += vec.y;
-		z += vec.z; 
-	}
-
-	vec3 operator-=(vec3 &vec) {
-		x -= vec.x;
-		y -= vec.y;
-		z -= vec.z;
-	}
-
-	vec3 operator=(vec3 &vec) {
-		x = vec.x; 
-		y = vec.y; 
-		z = vec.z; 
-	}
-
-	bool operator==(vec3 &vec) 
-	{
-		if (x == vec.x && y == vec.y && z == vec.z) { return true; }
-		else { return false; }
-	}
-
-	void normalize()
-	{ 
-		x = x / sqrt(x * x + y * y + z * z);
-		y = y / sqrt(x * x + y * y + z * z);
-		z = z / sqrt(x * x + y * y + z * z);
-	}
-
-	void zero() {
-		x = 0; 
-		y = 0; 
-		z = 0; 
-	}
-
-	bool is_zero() const
-	{
-		if (x == 0 && y == 0 && z == 0) { return true; }
-		else { return false; }
-	}
-
-	float distance_to(const vec3*vec) 
-	{
-		float x_dist = (vec->x - x)*(vec->x - x);
-		float y_dist = (vec->y - y)*(vec->y - y);
-		float z_dist = (vec->z - z)*(vec->z - z); 
-		float total_dist = sqrt(x_dist + y_dist + z_dist); 
-
-		return total_dist; 
-	}
-};
+#include "vec3.h"
 
 int main() 
 {
-	vec3 *vec1 = new vec3();
+	vec3<float> *vec1 = new vec3<float>(1, 1, 1);
 	cout << "Vector 1: (" << vec1->x << "," << vec1->y << "," << vec1->z << ")" << endl << endl; 
 	
-	vec3 *vec2 = new vec3(3, 1, 2);
+	vec3<float> *vec2 = new vec3<float>(3, 1, 2);
 	cout << "Vector 2: (" << vec2->x << "," << vec2->y << "," << vec2->z << ")" << endl << endl;
 
+	vec3<float> *vec0 = new vec3<float>(3, 1, 2);
+
+	/**vec0 = *vec1 + *vec2;
+	cout << "Vector 1 + Vector 2 = (" << vec0->x << "," << vec0->y << "," << vec0->z << ")" << endl << endl;
+
+	vec3<float> *vec4 = new vec3<float>(3, 1, 2);
+
+	*vec4 = *vec1 - *vec2;
+	cout << "Vector 1 - Vector 2 = (" << vec0->x << "," << vec0->y << "," << vec0->z << ")" << endl << endl;*/
+
+	//+=
+	*vec1 += *vec1; 
+	cout << "Vector 1 + Vector 1 = (" << vec1->x << "," << vec1->y << "," << vec1->z << ")" << endl << endl;
+	
+	//-=
+	vec3<float> *vec4 = new vec3<float>(1, 1, 1);
+	*vec4 -= *vec4;
+	cout << "Vector 1 - Vector 1 = (" << vec4->x << "," << vec4->y << "," << vec4->z << ")" << endl << endl;
+	
+	//NORMALIZE
 	vec2->normalize();
 	cout << "Vector 2 normalized: (" << vec2->x << "," << vec2->y << "," << vec2->z << ")" << endl << endl;
-
+	
+	//VEC TO ZERO
 	vec2->zero(); 
 	cout << "Vector 2 to zero: (" << vec2->x << "," << vec2->y << "," << vec2->z << ")" << endl << endl;
 
+	//IS ZERO?
 	cout << "Is Vector 2 zero? " << vec2->is_zero() << endl << endl;
 
+	//DISTANCE
 	cout << "Distance between Vector 1 and Vector 2: " << vec1->distance_to(vec2) << endl << endl;
 
 	system("pause");

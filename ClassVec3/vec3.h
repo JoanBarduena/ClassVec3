@@ -1,7 +1,6 @@
 #ifndef _VEC3_H_
 #define _VEC3_H_
 
-template <class T>
 
 class vec3
 {
@@ -11,42 +10,39 @@ public:
 
 public:
 
+	//Constructors
 	vec3() :x(0), y(0), z(0) {}
 
 	vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 
-	vec3(vec3& vec) {
+	vec3(const vec3& vec) {
 		x = vec.x;
 		y = vec.y;
 		z = vec.z;
 	}
 
+	//Destructor
 	~vec3() {}
 
-	vec3 operator+(vec3 &vec) {
-		vec3 newVec(x + vec.x, y + vec.y, z + vec.z);
-		return newVec;
+	//Operators
+	vec3 operator+(const vec3 &vec) const  {
+		return vec3(x + vec.x,y + vec.y, z + vec.z);
 	}
 
-	vec3 operator-(vec3 &vec) {
-		vec3 newVec(x - vec.x, y - vec.y, z - vec.z);
-		return newVec;
+	vec3 operator-(const vec3 &vec) const {
+		return vec3(x - vec.x, y - vec.y, z - vec.z);
 	}
 
-	vec3 operator+=(vec3 &vec) {
-		vec3 newVec(x += vec.x, y += vec.y, z += vec.z);
-		return newVec; 
+	vec3 operator+=(const vec3 &vec) {
+		return vec3(x += vec.x, y += vec.y, z += vec.z);
 	}
 
-	vec3 operator-=(vec3 &vec) {
-		vec3 newVec(x -= vec.x, y -= vec.y, z -= vec.z);
-		return newVec;
+	vec3 operator-=(const vec3 &vec) {
+		return vec3(x -= vec.x, y -= vec.y, z -= vec.z);
 	}
 
-	vec3 operator=(vec3 &vec) {
-		x = vec.x;
-		y = vec.y;
-		z = vec.z;
+	vec3 operator=(const vec3 &vec) {
+		return vec3(x = vec.x, y = vec.y, z = vec.z);
 	}
 
 	const bool operator==(vec3 &vec)
@@ -55,6 +51,7 @@ public:
 		else { return false; }
 	}
 
+	//Methods
 	void normalize()
 	{
 		x = x / sqrt(x * x + y * y + z * z);

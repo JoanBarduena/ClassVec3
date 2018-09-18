@@ -1,7 +1,6 @@
 #ifndef _VEC3_H_
 #define _VEC3_H_
 
-
 class vec3
 {
 public:
@@ -45,38 +44,33 @@ public:
 		return vec3(x = vec.x, y = vec.y, z = vec.z);
 	}
 
-	const bool operator==(vec3 &vec)
-	{
-		if (x == vec.x && y == vec.y && z == vec.z) { return true; }
-		else { return false; }
+	bool operator==(const vec3 &vec) const {
+		return (x == vec.x && y == vec.y && z == vec.z);
 	}
 
 	//Methods
-	void normalize()
-	{
-		x = x / sqrt(x * x + y * y + z * z);
-		y = y / sqrt(x * x + y * y + z * z);
-		z = z / sqrt(x * x + y * y + z * z);
+	void normalize() {
+		x = x / sqrtf(x * x + y * y + z * z);
+		y = y / sqrtf(x * x + y * y + z * z);
+		z = z / sqrtf(x * x + y * y + z * z);
 	}
 
 	void zero() {
-		x = 0;
-		y = 0;
-		z = 0;
+		x = 0.0f;
+		y = 0.0f;
+		z = 0.0f;
 	}
 
-	bool is_zero() const
-	{
+	bool is_zero() const {
 		if (x == 0 && y == 0 && z == 0) { return true; }
 		else { return false; }
 	}
 
-	float distance_to(const vec3*vec)
-	{
+	float distance_to(const vec3*vec) {
 		float x_dist = (vec->x - x)*(vec->x - x);
 		float y_dist = (vec->y - y)*(vec->y - y);
 		float z_dist = (vec->z - z)*(vec->z - z);
-		float total_dist = sqrt(x_dist + y_dist + z_dist);
+		float total_dist = sqrtf(x_dist + y_dist + z_dist);
 
 		return total_dist;
 	}
